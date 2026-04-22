@@ -1,6 +1,6 @@
 <?php
 echo"<br><button><a href='Materi1.php'>Materi 1 : Variabel dan tipe data</a></button>";
-echo"<br><button><a href='materi2.php'>Materi 2 : konndisi daan looping</a></button>";
+echo"<br><button><a href='materi2.php'>Materi 2 : kondisi daan looping</a></button>";
 echo"<br><button><a href='materi3.php'>Materi 3</a></button>";
 echo"<br><button><a href='materi4.php'>Materi 4</a></button>";
 echo"<br><button><a href='materi5.php'>Materi 5</a></button>";
