@@ -1,7 +1,5 @@
 <?php
-// MATERI FUNCTION
-
-echo "<h2 style='color:blue;'>Materi 3: Function PHP</h2>";
+echo "<h2 style='color:blue;'>Materi 3: Function PHP - Kalkulator</h2>";
 echo "<hr>";
 
 // function sapa
@@ -9,14 +7,23 @@ function sapa($nama) {
     return "Halo, selamat datang $nama <br>";
 }
 
-// function tambah
-function tambah($a, $b) {
-    return $a + $b;
-}
-
-// function cek bilangan
-function cekBilangan($angka) {
-    return ($angka % 2 == 0) ? "Genap" : "Ganjil";
+// function kalkulator
+function hitung($a, $b, $operator) {
+    switch ($operator) {
+        case "+":
+            return $a + $b;
+        case "-":
+            return $a - $b;
+        case "*":
+            return $a * $b;
+        case "/":
+            if ($b == 0) {
+                return "Tidak bisa dibagi 0";
+            }
+            return $a / $b;
+        default:
+            return "Operator tidak valid";
+    }
 }
 ?>
 
@@ -32,7 +39,13 @@ function cekBilangan($angka) {
     Angka 2: <input type="number" name="angka2">
     <br><br>
 
-    Cek Angka: <input type="number" name="cek">
+    Operator:
+    <select name="operator">
+        <option value="+">Penjumlahan (+)</option>
+        <option value="-">Pengurangan (-)</option>
+        <option value="*">Perkalian (*)</option>
+        <option value="/">Pembagian (/)</option>
+    </select>
     <br><br>
 
     <button type="submit" name="kirim">Kirim</button>
@@ -45,7 +58,7 @@ if (isset($_POST['kirim'])) {
     $nama = $_POST['nama'];
     $a = $_POST['angka1'];
     $b = $_POST['angka2'];
-    $cek = $_POST['cek'];
+    $operator = $_POST['operator'];
 
     echo "<hr>";
     echo "<h3 style='color:green;'>Hasil:</h3>";
@@ -55,11 +68,7 @@ if (isset($_POST['kirim'])) {
     }
 
     if ($a !== "" && $b !== "") {
-        echo "Hasil tambah: " . tambah($a, $b) . "<br>";
-    }
-
-    if ($cek !== "") {
-        echo "Angka $cek adalah: " . cekBilangan($cek) . "<br>";
+        echo "Hasil: $a $operator $b = " . hitung($a, $b, $operator) . "<br>";
     }
 }
 ?>
