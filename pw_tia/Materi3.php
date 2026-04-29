@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 echo "<h2 style='color:blue;'>Materi 3: Function PHP - Kalkulator</h2>";
 echo "<hr>";
 
@@ -25,9 +27,42 @@ function hitung($a, $b, $operator) {
             return "Operator tidak valid";
     }
 }
+
+// PROSES LOGIN
+if (isset($_POST['login'])) {
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+
+    // LOGIN SEDERHANA (hardcode)
+    if ($user == "admin" && $pass == "080206") {
+        $_SESSION['login'] = true;
+    } else {
+        echo "<p style='color:red;'>Login gagal!</p>";
+    }
+}
+
+// LOGOUT
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: ");
+}
 ?>
 
-<!-- FORM INPUT -->
+<!-- ================= LOGIN FORM ================= -->
+<?php if (!isset($_SESSION['login'])): ?>
+
+<h3>Login</h3>
+<form method="post">
+    Username: <input type="text" name="username">
+    <br><br>
+    Password: <input type="password" name="password">
+    <br><br>
+    <button type="submit" name="login">Login</button>
+</form>
+
+<?php else: ?>
+
+<!-- ================= KALKULATOR ================= -->
 <h3>Form Input</h3>
 <form method="post">
     Nama: <input type="text" name="nama">
@@ -51,6 +86,11 @@ function hitung($a, $b, $operator) {
     <button type="submit" name="kirim">Kirim</button>
 </form>
 
+<br>
+<form method="post">
+    <button name="logout">Logout</button>
+</form>
+
 <?php
 // CEK JIKA TOMBOL DIKLIK
 if (isset($_POST['kirim'])) {
@@ -72,3 +112,5 @@ if (isset($_POST['kirim'])) {
     }
 }
 ?>
+
+<?php endif; ?>
